@@ -5,10 +5,10 @@ Welcome to InstaConnect, your MERN stack-based open-source social media platform
 ## Prerequisites
 Before you get started, ensure you have the following prerequisites installed on your local machine:
 
-1. Node.js
-2. npm or yarn
-3. MongoDB (for the server)
-4. Git (for cloning the repository)
+- Node.js
+- npm or yarn
+- MongoDB (for the server)
+- Git (for cloning the repository)
 
 ## Installation
 Follow these steps to set up the application:
