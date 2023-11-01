@@ -22,7 +22,7 @@ Follow these steps to set up the application:
 - Navigate to the server directory: cd server.
 - Run npm i to install the back-end dependencies.
 
-##Configuration
+## Configuration
 The application is configured to run on your local machine by default. No additional configuration is required.
 
 ## Usage
