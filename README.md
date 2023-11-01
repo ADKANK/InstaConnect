@@ -13,11 +13,11 @@ Before you get started, ensure you have the following prerequisites installed on
 ## Installation
 Follow these steps to set up the application:
 
-## Client (Front-End)
+### Client (Front-End)
 - Open your command line.
 - Navigate to the client directory: cd client.
 - Run npm i to install the front-end dependencies.
-## Server (Back-End)
+### Server (Back-End)
 - Open a new command line window.
 - Navigate to the server directory: cd server.
 - Run npm i to install the back-end dependencies.
