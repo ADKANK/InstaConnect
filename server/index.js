@@ -18,22 +18,14 @@ import User from './models/User.js';
 import Post from './models/Post.js';
 import { posts, users } from './data/index.js';
 import postRoutes from './routes/posts.js';
+
 /*CONFIGURATIONS*/
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config();
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-// if (!admin.apps.length) {
-//     try {
-//         admin.initializeApp({
-//             credential: admin.credential.cert(serviceAccount), // Change to admin.credential.cert(serviceAccount) if using a service account
-//             storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-//         });
-//     } catch (error) {
-//         console.error("Firebase Admin Initialization Error:", error);
-//         throw error;
-//     }
-// }
+dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(helmet());
