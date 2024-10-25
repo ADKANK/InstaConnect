@@ -63,7 +63,7 @@ const Form = () => {
         formData.append("picturePath", values.picture.name);
 
         const savedUserResponse = await fetch(
-            "http://localhost:3001/auth/register",
+            "https://server-liard-seven-86.vercel.app/auth/register",
             {
                 method: "POST",
                 body: formData,
@@ -78,7 +78,7 @@ const Form = () => {
     };
 
     const login = async (values, onSubmitProps) => {
-        const loginResponse = await fetch("http://localhost:3001/auth/login", {
+        const loginResponse = await fetch("https://server-liard-seven-86.vercel.app/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
