@@ -8,7 +8,7 @@ const bucket = storage.bucket();
 const options = {
     version: 'v4',
     action: 'read',
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 365 * 2, // 2 years
+    expires: Date.now() + 604800 * 1000, // 2 years
 };
 
 const uploadToFirebaseStorage = async (fileBuffer, fileName, mimeType) => {

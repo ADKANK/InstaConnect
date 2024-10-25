@@ -17,6 +17,7 @@ import User from './models/User.js';
 import Post from './models/Post.js';
 import { posts, users } from './data/index.js';
 import postRoutes from './routes/posts.js';
+import { seedDatabase } from './api/services/seedDatabase.js';
 
 /*CONFIGURATIONS*/
 const __filename = fileURLToPath(import.meta.url);
@@ -49,6 +50,5 @@ mongoose.connect(process.env.MONGO_URL, {
 }).then(() => {
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
 
-    User.insertMany(users);
-    Post.insertMany(posts);
+    // seedDatabase()
 }).catch((error) => console.log(`${error} did not connect`));
