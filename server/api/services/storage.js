@@ -1,7 +1,15 @@
 
 import admin from '../../firebase.js'
 
-const bucket = admin.storage().bucket();
+const storage = admin.storage(); 
+const bucket = storage.bucket();
+
+
+const options = {
+    version: 'v4',
+    action: 'read',
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 365 * 2, // 2 years
+};
 
 const uploadToFirebaseStorage = async (fileBuffer, fileName, mimeType) => {
     const file = bucket.file(fileName);
@@ -9,7 +17,9 @@ const uploadToFirebaseStorage = async (fileBuffer, fileName, mimeType) => {
         metadata: { contentType: mimeType },
         public: true, 
     });
-    return `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${fileName}`;
+    const [url] = await file.getSignedUrl(options);
+    // return `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${fileName}`;
+    return url; 
 };
 
 export default uploadToFirebaseStorage;
