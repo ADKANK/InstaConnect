@@ -6,11 +6,8 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import admin from 'firebase-admin';
 import path from 'path';
-
-
-// Set up Multer
-
 import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
@@ -21,14 +18,22 @@ import User from './models/User.js';
 import Post from './models/Post.js';
 import { posts, users } from './data/index.js';
 import postRoutes from './routes/posts.js';
-
 /*CONFIGURATIONS*/
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
 dotenv.config();
+
+// if (!admin.apps.length) {
+//     try {
+//         admin.initializeApp({
+//             credential: admin.credential.cert(serviceAccount), // Change to admin.credential.cert(serviceAccount) if using a service account
+//             storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+//         });
+//     } catch (error) {
+//         console.error("Firebase Admin Initialization Error:", error);
+//         throw error;
+//     }
+// }
 const app = express();
 app.use(express.json());
 app.use(helmet());
