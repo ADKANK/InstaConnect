@@ -78,7 +78,7 @@ const Form = () => {
     };
 
     const login = async (values, onSubmitProps) => {
-        const loginResponse = await fetch("https://server-chi-bay.vercel.app/login", {
+        const loginResponse = await fetch("https://server-chi-bay.vercel.app/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
