@@ -22,7 +22,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
     const getUserPosts = async () => {
         const response = await fetch(
-            `https://server-chi-bay.vercel.app/${userId}/posts`, {
+            `https://server-chi-bay.vercel.app/posts/${userId}/posts`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -41,14 +41,15 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <>
-            {posts.map(
+    <>
+        {Array.isArray(posts) && posts.length > 0 ? (
+            posts.map(
                 ({
                     _id,
                     userId,
                     firstName,
                     lastName,
-                    discription,
+                    description,
                     location,
                     picturePath,
                     userPicturePath,
@@ -60,7 +61,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
                         postId={_id}
                         postUserId={userId}
                         name={`${firstName} ${lastName}`}
-                        discription={discription}
+                        description={description}
                         location={location}
                         picturePath={picturePath}
                         userPicturePath={userPicturePath}
@@ -68,9 +69,13 @@ const PostsWidget = ({ userId, isProfile = false }) => {
                         comments={comments}
                     />
                 )
-            )}
-        </>
-    )
+            )
+        ) : (
+            <p>No posts available.</p>
+        )}
+    </>
+);
+    
 }
 
 

@@ -18,7 +18,6 @@ const uploadToFirebaseStorage = async (fileBuffer, fileName, mimeType) => {
         public: true, 
     });
     const [url] = await file.getSignedUrl(options);
-    // return `https://storage.googleapis.com/${process.env.FIREBASE_STORAGE_BUCKET}/${fileName}`;
     return url; 
 };
 

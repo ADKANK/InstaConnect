@@ -22,7 +22,7 @@ const AdvertWidget = () => {
                 width="100%"
                 height="auto"
                 alt="advert"
-                src="http://localhost:3001/assets/info4.jpeg"
+                src="https://firebasestorage.googleapis.com/v0/b/instaconnect-3b72c.appspot.com/o/info4.jpeg?alt=media&token=b0db026a-fcb8-4af9-93cf-1f9ec7d9d9b6"
                 style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
             />
             <FlexBetween>

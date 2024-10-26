@@ -5,11 +5,24 @@ import { users, posts } from "../../data/index.js"; // Adjust the import path to
 import uploadToFirebaseStorage from "./storage.js"; // Adjust the import path as necessary
 import fs from 'fs'; // File system module to read images
 
-
 // Function to seed the database
 const getRandomImage = (images) => {
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
+};
+
+// Function to generate random likes
+const generateRandomLikes = (userIds) => {
+    const likes = new Map();
+    const numberOfLikes = Math.floor(Math.random() * userIds.length); // Random number of likes (0 to total users)
+    
+    // Randomly select users to like the post
+    for (let i = 0; i < numberOfLikes; i++) {
+        const randomUserId = userIds[Math.floor(Math.random() * userIds.length)];
+        likes.set(randomUserId, true);
+    }
+
+    return likes;
 };
 
 // Function to seed the database
@@ -18,7 +31,6 @@ export const seedDatabase = async () => {
         await User.deleteMany({});
         await Post.deleteMany({});
 
-        // User images
         const userImagesDir = '../../../../InstaConnect/server/public/assets';
         const userImages = fs.readdirSync(userImagesDir).filter(file => /\.(jpg|jpeg|png|gif)$/.test(file));
 
@@ -39,22 +51,37 @@ export const seedDatabase = async () => {
 
         await User.insertMany(usersWithSignedURLs);
 
-        // Post images
+
         const postImagesDir = '../../../../InstaConnect/server/public/assets';
         const postImages = fs.readdirSync(postImagesDir).filter(file => /\.(jpg|jpeg|png|gif)$/.test(file));
 
-        // Read and upload post images
+        // Generate posts with signed URLs
         const postsWithSignedURLs = await Promise.all(
             posts.map(async (post) => {
                 const postImageFileName = getRandomImage(postImages); // Get a random image
                 const postImageBuffer = fs.readFileSync(`${postImagesDir}/${postImageFileName}`);
                 const mimeType = "image/jpeg"; // Adjust as necessary
 
-                // Upload and get signed URL
+                // Upload and get signed URL for post picture
                 const postSignedUrl = await uploadToFirebaseStorage(postImageBuffer, postImageFileName, mimeType);
-                post.picturePath = postSignedUrl; // Update picturePath with signed URL
+                post.picturePath = postSignedUrl; 
+                
+                
+                const user = usersWithSignedURLs[Math.floor(Math.random() * usersWithSignedURLs.length)];
 
-                return { ...post, _id: new mongoose.Types.ObjectId() }; // Ensure unique ID
+                const likes = generateRandomLikes(usersWithSignedURLs.map(user => user._id));
+
+                return {
+                    _id: new mongoose.Types.ObjectId(),
+                    userId: user._id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    location: user.location,
+                    description: post.description,
+                    picturePath: post.picturePath, 
+                    userPicturePath: user.picturePath, 
+                    likes: likes, 
+                };
             })
         );
 
