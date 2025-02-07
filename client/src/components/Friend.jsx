@@ -19,7 +19,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
 
-    const isFriend = friends.some((friend) => friend._id === friendId);
+    const isFriend = Array.isArray(friends) ? friends.some((friend) => friend?._id === friendId) : false;
 
     const fetchFriends = async () => {
         const response = await fetch(`https://server-chi-bay.vercel.app/users/${_id}/friends`, {

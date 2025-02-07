@@ -13,11 +13,7 @@ import userRoutes from './routes/users.js';
 import { createPost } from './controllers/posts.js';
 import { register } from './controllers/auth.js';
 import { verifyToken } from './middleware/auth.js';
-import User from './models/User.js';
-import Post from './models/Post.js';
-import { posts, users } from './data/index.js';
 import postRoutes from './routes/posts.js';
-import { seedDatabase } from './api/services/seedDatabase.js';
 
 /*CONFIGURATIONS*/
 const __filename = fileURLToPath(import.meta.url);
@@ -45,8 +41,9 @@ app.post('/posts', verifyToken, upload.single("picture"), createPost);
 /* Mongoose Setup*/
 const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL, {
-    useNewURLParser: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
 }).catch((error) => console.log(`${error} did not connect`));
+

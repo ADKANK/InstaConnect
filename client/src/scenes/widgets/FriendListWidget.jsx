@@ -19,16 +19,25 @@ const FriendListWidget = ({ userId }) => {
                     Authorization: `Bearer ${token}`,
                 }
             });
+    
             if (!response.ok) {
                 throw new Error('Failed to fetch friends');
             }
+    
             const data = await response.json();
-            console.log('Friends data:', data); // Log the fetched data
-            dispatch(setFriends({ friends: data }));
+            console.log('Friends data:', data);
+    
+            if (Array.isArray(data)) {
+                dispatch(setFriends({ friends: data })); // ✅ Only update if `data` is an array
+            } else {
+                console.warn("Received invalid friends data:", data);
+            }
+    
         } catch (error) {
             console.error('Error fetching friends:', error);
         }
     };
+    
 
     useEffect(() => {
         getFriends();

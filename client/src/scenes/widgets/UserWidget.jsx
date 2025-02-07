@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 const UserWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState(null);
-    const friends = useSelector((state) => state.user.friends);
+    const friends = useSelector((state) => state.user?.friends || []);
     const [friendsLength, setFriendsLength] = useState(friends.length);
     const { palette } = useTheme();
     const navigate = useNavigate();
