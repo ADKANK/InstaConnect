@@ -13,7 +13,7 @@ const FriendListWidget = ({ userId }) => {
 
     const getFriends = async () => {
         try {
-            const response = await fetch(`https://server-chi-bay.vercel.app/users/${userId}/friends`, {
+            const response = await fetch(`https://insta-connect-server-wine.vercel.app/users/${userId}/friends`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,

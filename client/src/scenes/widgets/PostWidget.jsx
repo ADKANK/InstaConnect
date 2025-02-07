@@ -30,7 +30,7 @@ const PostWidget = ({
     const primary = palette.primary.main;
 
     const patchLike = async () => {
-        const response = await fetch(`https://server-chi-bay.vercel.app/posts/${postId}/like`, {
+        const response = await fetch(`https://insta-connect-server-wine.vercel.app/posts/${postId}/like`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,

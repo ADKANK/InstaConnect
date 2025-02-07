@@ -22,7 +22,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const isFriend = Array.isArray(friends) ? friends.some((friend) => friend?._id === friendId) : false;
 
     const fetchFriends = async () => {
-        const response = await fetch(`https://server-chi-bay.vercel.app/users/${_id}/friends`, {
+        const response = await fetch(`https://insta-connect-server-wine.vercel.app/users/${_id}/friends`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     };
 
     const patchFriend = async () => {
-        const response = await fetch(`https://server-chi-bay.vercel.app/users/${_id}/${friendId}`, {
+        const response = await fetch(`https://insta-connect-server-wine.vercel.app/users/${_id}/${friendId}`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,

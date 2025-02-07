@@ -63,7 +63,7 @@ const Form = () => {
         formData.append("picturePath", values.picture.name);
 
         const savedUserResponse = await fetch(
-            "https://server-chi-bay.vercel.app/auth/register",
+            "https://insta-connect-server-wine.vercel.app/auth/register",
             {
                 method: "POST",
                 body: formData,
@@ -78,7 +78,7 @@ const Form = () => {
     };
 
     const login = async (values, onSubmitProps) => {
-        const loginResponse = await fetch("https://server-chi-bay.vercel.app/auth/login", {
+        const loginResponse = await fetch("https://insta-connect-server-wine.vercel.app/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
